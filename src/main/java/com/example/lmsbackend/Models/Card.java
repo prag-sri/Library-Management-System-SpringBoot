@@ -27,6 +27,6 @@ public class Card {
     @JoinColumn
     private Student student;
 
-    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
     private List<Book> booksIssued;
 }

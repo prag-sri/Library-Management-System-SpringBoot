@@ -18,6 +18,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Enumerated(value = EnumType.STRING)
     private Genre genre;
 
     @ManyToOne

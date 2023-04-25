@@ -7,8 +7,12 @@ import com.example.lmsbackend.Repositories.AuthorRepository;
 import com.example.lmsbackend.Repositories.BookRepository;
 import com.example.lmsbackend.RequestDTOs.BookRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,10 +38,21 @@ public class BookService {
         author.setBooksWritten(bookList);
 
         //saving author
-        authorRepository.save(author);
+//        authorRepository.save(author);
 
         bookRepository.save(newBook);
 
         return "New Book created successfully!";
+    }
+
+    public List<Book> suggestBook(String genre){
+        List<Book> booksRecommended= new ArrayList<>();
+        List<Book> books= bookRepository.findAll();
+        for(Book book: books)
+        {
+            if(book.getGenre().toString().equals(genre))
+                booksRecommended.add(book);
+        }
+        return booksRecommended;
     }
 }
